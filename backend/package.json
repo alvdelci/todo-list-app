@@ -1,0 +1,11 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "API do app de to-do",
+  "main": "index.js",
+  "author": "Delcimario Alves",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
