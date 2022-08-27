@@ -5,7 +5,7 @@ const routes = express.Router();
 
 routes.post("/create", controller.create);
 routes.post("/update", controller.update);
-routes.post("/remove", controller.remove);
+routes.post("/delete", controller.delete);
 routes.get("/view", controller.view);
 
 module.exports = routes;
