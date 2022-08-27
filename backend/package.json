@@ -5,8 +5,12 @@
   "main": "index.js",
   "author": "Delcimario Alves",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "mysql": "^2.18.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
