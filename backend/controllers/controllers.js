@@ -1,23 +1,71 @@
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
+
 module.exports = {
-    create(req, res) {
-        console.log("Adicionar tarefa");
-        let { id, name, description } = req.body;
-        res.status(200).json({ response: "success", data: { id: id, name: name, description: description } });
+    /**
+     * @param {{ name: string, description: string }} req
+     * @param {{ response: string, data: { id: number, name: string, description: string }}} res 
+     */
+    async create(req, res) {
+        let { name, description } = req.body;
+
+        let createTask = await prisma.task.create({
+            data: {
+                name: name,
+                description: description
+            }
+        });
+
+        res.status(200).json({ response: "success", data: createTask });
     },
 
-    update(req, res) {
-        console.log("Atualizar tarefa");
+    /**
+     * @param {{ id: number, newName: string, newDescription: string }} req
+     * @param {{ response: string, data: { id: number, name: string, description: string }}} res 
+     */
+    async update(req, res) {
         let { id, newName, newDescription } = req.body;
-        res.status(200).json({ response: "success", data: { id: id, newName: newName, newDescription: newDescription } });
+
+        let updateTask = await prisma.task.update({
+            where: {
+                id: id
+            },
+            data: {
+                name: newName,
+                description: newDescription
+            }
+        });
+
+        res.status(200).json({ response: "success", data: updateTask });
     },
 
-    remove(req, res) {
-        console.log("Remover tarefa");
+    /**
+     * @param {{ id: number }} req
+     * @param {{ response: string, data: { id: number, name: string, description: string }}} res 
+     */
+    async delete(req, res) {
         let { id } = req.body;
-        res.status(200).json({ response: "success", data: { id: id } });
+
+        let deleteTask = await prisma.task.delete({
+            where: {
+                id: id
+            }
+        });
+
+        res.status(200).json({ response: "success", data: deleteTask });
     },
-    view(req, res) {
-        console.log("Listar tarefas");
-        res.status(200).json({ response: "success" });
+
+    /**
+     * @param {{ response: string, data: [{ id: number, name: string, description: string }]}} res 
+     */
+    async view(req, res) {
+
+        let tasks = await prisma.task.findMany();
+
+        if (tasks == []) {
+            res.status(200).json({ response: "empty" })
+        } else {
+            res.status(200).json({ response: "success", data: tasks });
+        }
     }
 }
