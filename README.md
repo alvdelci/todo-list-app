@@ -7,21 +7,21 @@ O schema do banco de dados foi desenvolvido com Prisma (Técnica de mapeamento o
 
 ### `Inicializar a API`
 Pré-requisitos:
-    -MySQL
-    -Node.js
-    -criar um arquivo `.env` na pasta backend/ e adicionar as informações da conexão
+    -MySQL\
+    -Node.js\
+    -criar um arquivo `.env` na pasta backend/ e adicionar as informações da conexão\
         `DATABASE_URL="mysql://user:password@localhost:port/db-name"`
 
 Comandos:
-    -yarn install (para instalar as dependências do projeto)
-    -yarn prisma generate (para criar as tabelas no banco de dados)
+    -yarn install (para instalar as dependências do projeto)\
+    -yarn prisma generate (para criar as tabelas no banco de dados)\
     -yarn start (no diretório backend/) (Inicializa o servidor na porta especificada. Default: port 3333)
 
 ### `ENDPOINTS`
-url = `http://localhost:3333/`
-Criar task: url/create (POST)
-Atualizar task: url/update (POST)
-Remover task: url/delete (POST)
+url = `http://localhost:3333/`\
+Criar task: url/create (POST)\
+Atualizar task: url/update (POST)\
+Remover task: url/delete (POST)\
 Visualizar todas as tasks: url/view (GET)
 
 
@@ -29,9 +29,9 @@ Visualizar todas as tasks: url/view (GET)
 
 Frontend desenvolvido em ReactJS e Styled-Components.
 
-Pré-requisitos:
+Pré-requisitos:\
     -Node.js
 
 Comandos:
-    -yarn install (instalar dependências do projeto)
-    -yarn start (Inicializa a aplicação na porta especificada. Default: port 3000)
+    -yarn install (instalar dependências do projeto)\
+    -yarn start (no diretório frontend/) (Inicializa a aplicação na porta especificada. Default: port 3000)
