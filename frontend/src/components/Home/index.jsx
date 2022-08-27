@@ -11,15 +11,15 @@ export default function Home() {
         setShowModal(!showModal);
     }
 
-    console.log("RESPOSTA");
-    console.log(view());
-
-    const [tasks, setTasks] = useState([]);
-    function handleTask(params) {
-        setTasks(prevState => {
-            return { ...prevState, params }
-        });
-    }
+    const [task, setTask] = useState([]);
+    useEffect(() => {
+        async function getData() {
+            let aux = await view();
+            setTask(aux.data.data);
+        }
+        getData()
+    }, [task.length]);
+    console.log(task);
 
     return (<>
         <Global />
@@ -29,18 +29,25 @@ export default function Home() {
                 <label>Adicionar nova Tarefa</label><br /><br />
                 <Button onClick={handleModal} color="orange">Criar</Button>
             </AddSection>
-            <Card>
-                <div className="header-card">
-                    <label>Nome Da Tarefa</label>
-                    <div className="buttons">
-                        <Button onClick={() => { }} color="green">Atualizar</Button>
-                        <Button onClick={() => { }} color="red">Excluir</Button>
-                    </div>
-                </div>
-                <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</span>
-            </Card>
+            {
+                task.map((e) => {
+                    return (
+                        <Card key={e.id}>
+                            <div className="header-card">
+                                <label>{e.name}</label>
+                                <div className="buttons">
+                                    <Button onClick={async () => { }} color="green">Atualizar</Button>
+                                    <Button onClick={async () => { remove({ id: e.id }) }} color="red">Excluir</Button>
+                                </div>
+                            </div>
+                            <span>{e.description}</span>
+                        </Card>
+                    )
+                })
+            }
+
         </Container>
-        <Modal show={showModal} handleClose={handleModal} />
+        <Modal show={showModal} handleClose={handleModal} saveData={create} />
     </>);
 
 }
