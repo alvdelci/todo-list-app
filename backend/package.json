@@ -5,10 +5,16 @@
   "main": "index.js",
   "author": "Delcimario Alves",
   "license": "MIT",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
+    "@prisma/client": "^4.2.1",
+    "cors": "^2.8.5",
     "express": "^4.18.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.19",
+    "prisma": "^4.2.1"
   }
 }
