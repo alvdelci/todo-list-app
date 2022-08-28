@@ -23,7 +23,7 @@ Criar task: url/create (POST)\
 Atualizar task: url/update (POST)\
 Remover task: url/delete (POST)\
 Visualizar todas as tasks: url/view (GET)\
-Busca uma task: url/find ()POST
+Busca uma task: url/find (POST)
 
 
 ## Frontend
