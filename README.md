@@ -22,7 +22,7 @@ url = `http://localhost:3333/`\
 Criar task: url/create (POST)\
 Atualizar task: url/update (POST)\
 Remover task: url/delete (POST)\
-Visualizar todas as tasks: url/view (GET)
+Visualizar todas as tasks: url/view (GET)\
 Busca uma task: url/find ()POST
 
 
