@@ -9,7 +9,7 @@ export const Modal = styled.div`
     left: 30vw;
     
     width: 40vw;
-    height: 45vh;
+    height: 50vh;
 
     border-radius: 10px;
     padding: 10px;
