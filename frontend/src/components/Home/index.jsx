@@ -1,14 +1,29 @@
 import React, { useState, useEffect } from "react";
-import Modal from "../Modal";
+import { ModalCreate, ModalUpdate } from "../Modal";
 import { AddSection, Button, Card, Container, Global, Title } from "./styles";
 
 import { create, update, remove, view } from "../../controller"
 
 export default function Home() {
 
-    const [showModal, setShowModal] = useState(false);
-    function handleModal() {
-        setShowModal(!showModal);
+    const [showModalCreate, setShowModalCreate] = useState(false);
+    function handleModalCreate() {
+        setShowModalCreate(!showModalCreate);
+    }
+
+    const [elementId, setElementId] = useState(0);
+    const [showModalUpdate, setShowModalUpdate] = useState(false);
+    function handleModalUpdate(param) {
+        setElementId(param);
+        setShowModalUpdate(!showModalUpdate);
+    }
+
+    //Auxiliar de renderização
+    const [rm, setRm] = useState(false);
+    async function handleRemove(param) {
+        remove({ id: param }).then((results) => {
+            setRm(results.data.data);
+        });
     }
 
     const [task, setTask] = useState([]);
@@ -18,8 +33,7 @@ export default function Home() {
             setTask(aux.data.data);
         }
         getData()
-    }, [task.length]);
-    console.log(task);
+    }, [task.length, rm]);
 
     return (<>
         <Global />
@@ -27,27 +41,35 @@ export default function Home() {
         <Container>
             <AddSection>
                 <label>Adicionar nova Tarefa</label><br /><br />
-                <Button onClick={handleModal} color="orange">Criar</Button>
+                <Button onClick={handleModalCreate} color="orange">Criar</Button>
             </AddSection>
             {
-                task.map((e) => {
-                    return (
-                        <Card key={e.id}>
-                            <div className="header-card">
-                                <label>{e.name}</label>
-                                <div className="buttons">
-                                    <Button onClick={async () => { }} color="green">Atualizar</Button>
-                                    <Button onClick={async () => { remove({ id: e.id }) }} color="red">Excluir</Button>
+                task.length !== 0 ? (
+                    task.map((e) => {
+                        return (
+                            <Card key={e.id}>
+                                <div className="header-card">
+                                    <label>{e.name}</label>
+                                    <div className="buttons">
+                                        <Button onClick={() => handleModalUpdate(e.id)} color="green">Atualizar</Button>
+                                        <Button onClick={() => handleRemove(e.id)} color="red">Excluir</Button>
+                                    </div>
                                 </div>
-                            </div>
-                            <span>{e.description}</span>
-                        </Card>
-                    )
-                })
+                                <span>{e.description}</span>
+                            </Card>
+                        )
+                    })
+                ) : (
+                    <div>
+                        <h1>Estamos bem!</h1>
+                        <h2>Nenhuma Tarefa Cadastrada</h2>
+                    </div>
+                )
             }
 
         </Container>
-        <Modal show={showModal} handleClose={handleModal} saveData={create} />
+        <ModalCreate show={showModalCreate} handleClose={handleModalCreate} saveData={create} />
+        <ModalUpdate show={showModalUpdate} elementId={elementId} handleClose={handleModalUpdate} saveData={update} />
     </>);
 
 }
