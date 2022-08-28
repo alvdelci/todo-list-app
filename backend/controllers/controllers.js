@@ -67,5 +67,21 @@ module.exports = {
         } else {
             res.status(200).json({ response: "success", data: tasks });
         }
+    },
+
+    /**
+     * @param {{id: number}} req 
+     * @param {{ response: string, data: { id: number, name: string, description: string }}} res 
+     */
+    async findTask(req, res) {
+        let { id } = req.body;
+
+        let task = await prisma.task.findUnique({
+            where: {
+                id: id
+            }
+        });
+
+        res.status(200).json({ response: "success", data: task });
     }
 }
