@@ -14,7 +14,7 @@ Pré-requisitos:\
 
 Comandos:\
     -yarn install (para instalar as dependências do projeto)\
-    prisma migrate dev --name init (para criar o arquivo de migrations SQL)
+    prisma migrate dev --name init (para criar o arquivo de migrations SQL)\
     -yarn prisma generate (para criar as tabelas no banco de dados)\
     -yarn start (no diretório backend/) (Inicializa o servidor na porta especificada. Default: port 3333)
 
